@@ -48,6 +48,15 @@
             @endforeach
           </select>
         </div>
+        <div class="form-group">
+          <label for="kanban_id">Kanban</label>
+          <select name="kanban_id" id="kanban_id" class="form-control" required>
+            <option value="">-- Pilih Data --</option>
+            @foreach ($kanbans as $kanban)
+              <option value="{{$kanban->id}}" @if ($schedule->kanban_id == $kanban->id) selected @endif>{{$kanban->name}}</option>
+            @endforeach
+          </select>
+        </div>
         <button type="submit" class="btn btn-success">Simpan</button>
         <a href="{{ route('schedule.index')}}" class="btn btn-secondary">Kembali</a>
       </form>

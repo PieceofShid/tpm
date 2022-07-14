@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kanban;
 use App\Models\Machine;
 use App\Models\MasterSchedule;
 use App\Models\Shift;
@@ -22,8 +23,9 @@ class MasterScheduleController extends Controller
         $users = User::where('level_id', 3)->get();
         $machines = Machine::all();
         $shifts = Shift::all();
+        $kanbans = Kanban::all();
 
-        return view('layout.page.schedule.tambah', compact('users', 'machines', 'shifts'));
+        return view('layout.page.schedule.tambah', compact('users', 'machines', 'shifts', 'kanbans'));
     }
 
     public function create(Request $request)
@@ -43,7 +45,9 @@ class MasterScheduleController extends Controller
         $machines = Machine::all();
         $shifts = Shift::all();
         $schedule = MasterSchedule::find($id);
-        return view('layout.page.schedule.edit', compact('schedule', 'users', 'machines', 'shifts'));
+        $kanbans = Kanban::all();
+
+        return view('layout.page.schedule.edit', compact('schedule', 'users', 'machines', 'shifts', 'kanbans'));
     }
 
     public function update(Request $request, $id)

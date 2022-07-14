@@ -59,6 +59,11 @@
               <span class="menu-title">Master Schedule</span>
             </a>
           </li>
+          <li class="nav-item @if(Route::is('kanban.index')||Route::is('kanban.add')||Route::is('kanban.edit')) active @endif">
+            <a class="nav-link" href="{{ route('kanban.index')}}">
+              <span class="menu-title">Data Kanban</span>
+            </a>
+          </li>
           <li class="nav-item @if(Route::is('mesin.index')||Route::is('mesin.add')||Route::is('mesin.edit')) active @endif">
             <a class="nav-link" href="{{ route('mesin.index')}}">
               <span class="menu-title">Data Mesin</span>

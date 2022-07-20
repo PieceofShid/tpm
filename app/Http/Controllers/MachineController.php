@@ -24,7 +24,7 @@ class MachineController extends Controller
         try{
             Machine::create($request->only('name'));
 
-            return redirect()->route('mesin.index')->with('success', 'Data berhasl ditambahkan');
+            return redirect()->route('mesin.index')->with('success', 'Data berhasil ditambahkan');
         }catch(Exception $x){
             return redirect()->route('mesin.index')->with('error', $x->getMessage());
         }

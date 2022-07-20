@@ -85,6 +85,7 @@ Route::middleware('auth')->group(function(){
     //Route Dashboard
     Route::prefix('dashboard')->group(function(){
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        Route::post('/{id}', [DashboardController::class, 'done'])->name('dashboard.done');
     });
     //Route Monthly
     Route::prefix('monthly')->group(function(){

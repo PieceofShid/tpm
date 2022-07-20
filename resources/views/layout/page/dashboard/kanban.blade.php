@@ -32,41 +32,71 @@
   <div class="row">
     <div class="col-md-4">
       <div class="border border-warning p-4 rounded">
-        <h4 class="text-center">Waiting</h4>
-        <hr>
-        @foreach ($waitings as $waiting)
-          <div class="bg-white border p-2 mb-2">
-            <p>Date : {{$waiting->date}}</p>
-            <p>Operator : {{$waiting->user->name}}</p>
-            <p>Tasks : {{$waiting->tasks}}</p>
-          </div>
-        @endforeach
+        <table class="table table-sm table-borderless" id="table">
+          <thead>
+            <tr>
+              <td class="text-center">Waiting</td>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach ($waitings as $waiting)
+              <tr>
+                <td>
+                  <div class="bg-white border p-2 mb-2">
+                    <p>{{$waiting->date}} - {{$waiting->user->name}}</p>
+                    <p>Tasks : {{$waiting->tasks}}</p>
+                  </div>
+                </td>
+              </tr>
+            @endforeach
+          </tbody>
+        </table>
       </div>
     </div>
     <div class="col-md-4">
-      <div class="border border-danger p-4 rounded text-center">
-        <h4>Delay</h4>
-        <hr>
-        @foreach ($delays as $delay)
-          <div class="bg-white border p-2 mb-2">
-            <p>Date : {{$delay->date}}</p>
-            <p>Operator : {{$delay->user->name}}</p>
-            <p>Tasks : {{$delay->tasks}}</p>
-          </div>
-        @endforeach
+      <div class="border border-danger p-4 rounded">
+        <table class="table table-sm table-borderless" id="table">
+          <thead>
+            <tr>
+              <td class="text-center">Delay</td>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach ($delays as $delay)
+              <tr>
+                <td>
+                  <div class="bg-white border p-2 mb-2">
+                    <p>{{$delay->date}} - {{$delay->user->name}}</p>
+                    <p>Tasks : {{$delay->tasks}}</p>
+                  </div>
+                </td>
+              </tr>
+            @endforeach
+          </tbody>
+        </table>
       </div>
     </div>
     <div class="col-md-4">
-      <div class="border border-success p-4 rounded text-center">
-        <h4>Done</h4>
-        <hr>
-        @foreach ($dones as $done)
-          <div class="bg-white border p-2 mb-2">
-            <p>Date : {{$done->date}}</p>
-            <p>Operator : {{$done->user->name}}</p>
-            <p>Tasks : {{$done->tasks}}</p>
-          </div>
-        @endforeach
+      <div class="border border-success p-4 rounded">
+        <table class="table table-sm table-borderless" id="table">
+          <thead>
+            <tr>
+              <td class="text-center">Done</td>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach ($dones as $done)
+              <tr>
+                <td>
+                  <div class="bg-white border p-2 mb-2">
+                    <p>{{$done->date}} - {{$done->user->name}}</p>
+                    <p>Tasks : {{$done->tasks}}</p>
+                  </div>
+                </td>
+              </tr>
+            @endforeach
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -74,5 +104,13 @@
 
 @section('script')
   <script>
+    $(document).ready(function(){
+      $('.table').DataTable({
+        searching: false,
+        ordering: false,
+        lengthChange: false,
+        info: false
+      });
+    })
   </script>
 @endsection

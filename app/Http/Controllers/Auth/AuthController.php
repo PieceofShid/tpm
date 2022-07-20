@@ -32,9 +32,9 @@ class AuthController extends Controller
         if(auth()->user()->level_id == 1){
             return redirect()->route('user.index');
         }elseif(auth()->user()->level_id == 2){
-            return 'belum ada menu';
+            return redirect()->route('schedule.index');
         }else{
-            return 'belum ada lah';
+            return redirect()->route('dashboard');
         }
     }
 

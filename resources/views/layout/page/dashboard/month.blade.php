@@ -22,12 +22,13 @@
               </div>';
     }
   @endphp
-  {{-- <div id="evoCalendar"></div> --}}
-  {{$event}}
+  <div id="evoCalendar"></div>
 @endsection
 
 @section('script')
   <script>
+
+    var events = @json($event);
 
     $(document).ready(function(){
       $('#evoCalendar').evoCalendar({

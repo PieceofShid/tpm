@@ -49,7 +49,6 @@
         <ul class="navbar-nav navbar-nav-right">
           <li class="nav-item">
             <a href="{{ route('auth.logout')}}" class="nav-link">
-              <i class="ti-power-off text-primary"></i>
               Logout
             </a>
           </li>
@@ -66,23 +65,23 @@
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
-          @if (auth()->user()->level_id == 1)
           <li class="nav-item @if(Route::is('dashboard.index')) active @endif">
             <a class="nav-link" href="{{ route('dashboard')}}">
               <i class="ti-dashboard menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
-          <li class="nav-item @if(Route::is('schedule.index')||Route::is('schedule.add')||Route::is('schedule.edit')) active @endif">
-            <a class="nav-link" href="{{ route('schedule.index')}}">
-              <i class="ti-calendar menu-icon"></i>
-              <span class="menu-title">Master Schedule</span>
-            </a>
-          </li>
           <li class="nav-item @if(Route::is('kanban.monthly')) active @endif">
             <a class="nav-link" href="{{ route('kanban.monthly')}}">
               <i class="ti-calendar menu-icon"></i>
              <span class="menu-title">Monthly Kanban</span>
+            </a>
+          </li>
+          @if (auth()->user()->level_id == 1)
+          <li class="nav-item @if(Route::is('schedule.index')||Route::is('schedule.add')||Route::is('schedule.edit')) active @endif">
+            <a class="nav-link" href="{{ route('schedule.index')}}">
+              <i class="ti-calendar menu-icon"></i>
+              <span class="menu-title">Master Schedule</span>
             </a>
           </li>
           <li class="nav-item @if(Route::is('kanban.index')) active @endif">
@@ -103,6 +102,8 @@
               <span class="menu-title">Data Shift</span>
             </a>
           </li>
+          @endif
+          @if (auth()->user()->level_id == 1 || auth()->user()->level_id == 2)
           <li class="nav-item @if(Route::is('user.index')||Route::is('user.add')||Route::is('user.edit')) active @endif">
             <a class="nav-link" href="{{ route('user.index')}}">
               <i class="ti-user menu-icon"></i>
@@ -169,7 +170,7 @@
   <script>
     $(document).ready(function(){
       window.setInterval(function () {
-          $('#clock').html(moment().format('dddd Do MMMM YYYY - hh:mm:ss'))
+          $('#clock').html(moment().format('dddd Do MMMM YYYY - HH:mm:ss'))
       }, 1000);
     });
   </script>

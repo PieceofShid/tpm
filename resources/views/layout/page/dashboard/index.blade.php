@@ -30,33 +30,34 @@
     }
   @endphp
   <div class="row">
-    <div class="col-md-9">
+    <div class="col-12 col-md-9">
       <div class="row">
         @foreach ($shifts as $shift)
-          <div class="col-4 mb-4">
-            <div class="border border-primary p-4 rounded text-center">
-              <h5 class="text-primary">{{$shift->name}}</h5>
+          <div class="col-md-4 mb-4">
+            <div class="border border-primary p-4 rounded">
+              <h5 class="text-primary text-center">{{$shift->name}}</h5>
               <hr>
               @php
                 // $schedules = \App\Models\MasterSchedule::where('shift_id', $shift->id)->where('date', 'CURRENT_DATE()')->get();
-                $schedules = \App\Models\MasterSchedule::where('shift_id', $shift->id)->get();
+                $schedules = \App\Models\MasterSchedule::where('shift_id', $shift->id)->where('status', 'waiting')->get();
               @endphp
               @foreach ($schedules as $key => $schedule)
                 <div class="card">
                   <div class="card-body">
                     <div class="row">
                       <div class="col">
-                        {{$schedule->user->name}}
-                      </div>
-                      <div class="col">
-                        {{$schedule->tasks}}
+                        <span class="font-weight-bold">Petugas :</span> {{$schedule->user->name}}
+                        <br>
+                        <span class="font-weight-bold">Mesin :</span>{{$schedule->machine->name}}
+                        <br>
+                        <span class="font-weight-bold">Task :</span>{{$schedule->tasks}}
                       </div>
                     </div>
                     <hr>
                     <div class="row">
                       <div class="col text-left">
-                        <button class="btn btn-sm btn-success">Done</button>
-                        <button class="btn btn-sm btn-info">Input</button>
+                        <button class="btn btn-sm btn-success" @if($schedule->user_id == auth()->id()|| auth()->user()->level_id == 1) onclick="done('{{$schedule->id}}')" @endif>Done</button>
+                        <button class="btn btn-sm btn-info" @if($schedule->user_id == auth()->id()|| auth()->user()->level_id == 1) onclick="alert('oke')" @endif>Input</button>
                       </div>
                     </div>
                   </div>
@@ -67,7 +68,7 @@
         @endforeach
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-12 col-md-3">
       <div class="card">
         <div class="card-body text-center">
           <h5>Document</h5>
@@ -79,9 +80,43 @@
       </div>
     </div>
   </div>
+
+  <div class="modal fade" id="modalDone" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Complete Tasks</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="post" id="formDone">
+          @csrf
+          @method('post')
+          </form>
+          <h4 class="text-center">Complete Tasks ?</h4>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" id="btnDone">Complete</button>
+          <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection
 
 @section('script')
   <script>
+    function done(id){
+      var url = "{{ route('dashboard.done', ":id")}}";
+      url = url.replace(':id', id);
+      $('#formDone').attr('action', url);
+      $('#modalDone').modal('show');
+    }
+
+    $('#btnDone').click(function(){
+      $('#formDone').submit();
+    });
   </script>
 @endsection

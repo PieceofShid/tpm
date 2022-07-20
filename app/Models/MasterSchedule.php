@@ -9,7 +9,7 @@ class MasterSchedule extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'date', 'shift_id', 'machine_id', 'kanban_id', 'status'];
+    protected $fillable = ['user_id', 'date', 'shift_id', 'machine_id', 'tasks', 'status'];
 
     public function user(){
         return $this->belongsTo(User::class, 'user_id');
@@ -21,9 +21,5 @@ class MasterSchedule extends Model
 
     public function machine(){
         return $this->belongsTo(Machine::class, 'machine_id');
-    }
-
-    public function kanban(){
-        return $this->belongsTo(Kanban::class, 'kanban_id');
     }
 }

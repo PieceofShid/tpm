@@ -48,7 +48,7 @@
             @endforeach
           </select>
         </div>
-        <div class="form-group">
+        {{-- <div class="form-group">
           <label for="kanban_id">Kanban</label>
           <select name="kanban_id" id="kanban_id" class="form-control" required>
             <option value="">-- Pilih Data --</option>
@@ -56,6 +56,10 @@
               <option value="{{$kanban->id}}" @if ($schedule->kanban_id == $kanban->id) selected @endif>{{$kanban->name}}</option>
             @endforeach
           </select>
+        </div> --}}
+        <div class="form-group">
+          <label for="tasks">Tasks</label>
+          <input type="text" name="tasks" id="tasks" class="form-control" value="{{$schedule->tasks}}" required>
         </div>
         <button type="submit" class="btn btn-success">Simpan</button>
         <a href="{{ route('schedule.index')}}" class="btn btn-secondary">Kembali</a>

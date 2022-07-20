@@ -41,7 +41,8 @@
               <th>Operator</th>
               <th>Mesin</th>
               <th>Shift</th>
-              <th>Kanban</th>
+              {{-- <th>Kanban</th> --}}
+              <th>Tasks</th>
               <th>Status</th>
               <th>Action</th>
             </tr>
@@ -54,7 +55,8 @@
                 <td>{{$schedule->user->name}}</td>
                 <td>{{$schedule->machine->name}}</td>
                 <td>{{$schedule->shift->name}}</td>
-                <td>{{$schedule->kanban->name}}</td>
+                {{-- <td>{{$schedule->kanban->name}}</td> --}}
+                <td>{{$schedule->tasks}}</td>
                 <td>
                   @php
                     if ($schedule->status == 'waiting') {

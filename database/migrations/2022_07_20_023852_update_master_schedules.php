@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('master_schedules', function(Blueprint $table){
-            $table->foreignId('kanban_id')->after('machine_id')->references('id')->on('kanbans')->cascadeOnDelete();
+            $table->string('tasks')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('master_schedules', function (Blueprint $table) {
-            $table->dropColumn('kanban_id');
+            $table->dropColumn('tasks');
         });
     }
 };

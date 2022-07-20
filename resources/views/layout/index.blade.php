@@ -28,11 +28,20 @@
         {{-- <a class="navbar-brand brand-logo mr-5" href="index.html"><img src="images/logo.svg" class="mr-2" alt="logo"/></a>
         <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg" alt="logo"/></a> --}}
         <a href="#" class="navbar-brand brand-logo mr-5">TPM Utility</a>
+        <a class="navbar-brand brand-logo-mini" href="#">TPM</a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
           <span class="icon-menu"></span>
         </button>
+        <ul class="navbar-nav mr-lg-2">
+          <li class="nav-item d-none d-lg-block">
+            UTILITY MAINTENANCE KANBAN CONTROL DASHBOARD
+          </li>
+          <li>
+           <span id="clock"></span>
+          </li>
+        </ul>
         <ul class="navbar-nav navbar-nav-right">
           <li class="nav-item">
             <a href="{{ route('auth.logout')}}" class="nav-link">
@@ -54,33 +63,45 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           @if (auth()->user()->level_id == 1)
+          <li class="nav-item @if(Route::is('dashboard.index')) active @endif">
+            <a class="nav-link" href="{{ route('dashboard')}}">
+              <i class="ti-dashboard menu-icon"></i>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
           <li class="nav-item @if(Route::is('schedule.index')||Route::is('schedule.add')||Route::is('schedule.edit')) active @endif">
             <a class="nav-link" href="{{ route('schedule.index')}}">
+              <i class="ti-calendar menu-icon"></i>
               <span class="menu-title">Master Schedule</span>
             </a>
           </li>
           <li class="nav-item @if(Route::is('kanban.index')||Route::is('kanban.add')||Route::is('kanban.edit')) active @endif">
             <a class="nav-link" href="{{ route('kanban.index')}}">
-              <span class="menu-title">Data Kanban</span>
+              <i class="ti-notepad menu-icon"></i>
+              <span class="menu-title">Kanban Check</span>
             </a>
           </li>
           <li class="nav-item @if(Route::is('mesin.index')||Route::is('mesin.add')||Route::is('mesin.edit')) active @endif">
             <a class="nav-link" href="{{ route('mesin.index')}}">
+              <i class="ti-settings menu-icon"></i>
               <span class="menu-title">Data Mesin</span>
             </a>
           </li>
           <li class="nav-item @if(Route::is('shift.index')||Route::is('shift.add')||Route::is('shift.edit')) active @endif">
             <a class="nav-link" href="{{ route('shift.index')}}">
+              <i class="ti-exchange-vertical menu-icon"></i>
               <span class="menu-title">Data Shift</span>
             </a>
           </li>
           <li class="nav-item @if(Route::is('user.index')||Route::is('user.add')||Route::is('user.edit')) active @endif">
             <a class="nav-link" href="{{ route('user.index')}}">
+              <i class="ti-user menu-icon"></i>
               <span class="menu-title">Data Pengguna</span>
             </a>
           </li>
           <li class="nav-item @if(Route::is('level.index')||Route::is('level.add')||Route::is('level.edit')) active @endif">
             <a class="nav-link" href="{{ route('level.index')}}">
+              <i class="ti-star menu-icon"></i>
               <span class="menu-title">Data Level</span>
             </a>
           </li>
@@ -97,15 +118,9 @@
           </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
-        <footer class="footer">
-          <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021.  Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash. All rights reserved.</span>
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="ti-heart text-danger ml-1"></i></span>
-          </div>
-          <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Distributed by <a href="https://www.themewagon.com/" target="_blank">Themewagon</a></span> 
-          </div>
-        </footer> 
+        <div style="position: absolute; bottom:0; left:0;width:100%">
+          <div class="px-2 bg-primary text-white"><marquee class="py-3">Selamat datang di website kami teknologi.visitklaten.com - Sharing Teknologi - Berbagi Ilmu Tentang Teknologi</marquee></div>
+        </div> 
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
@@ -126,10 +141,22 @@
   <!-- inject:js -->
   <script src="{{ asset('assets/script/off-canvas.js')}}"></script>
   <script src="{{ asset('assets/script/hoverable-collapse.js')}}"></script>
-  {{-- <script src="{{ asset('assets/script/template.js')}}"></script> --}}
+  <script src="{{ asset('assets/script/template.js')}}"></script>
   <!-- endinject -->
 
+  <!-- moment js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>
+
   @yield('script')
+
+  <script>
+    $(document).ready(function(){
+      window.setInterval(function () {
+          $('#clock').html(moment().format('dddd Do MMMM YYYY - hh:mm:ss'))
+      }, 1000);
+    });
+  </script>
 </body>
 
 </html>

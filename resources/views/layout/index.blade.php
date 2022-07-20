@@ -119,7 +119,7 @@
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
         <div style="position: absolute; bottom:0; left:0;width:100%">
-          <div class="px-2 bg-primary text-white"><marquee class="py-3">Selamat datang di website kami teknologi.visitklaten.com - Sharing Teknologi - Berbagi Ilmu Tentang Teknologi</marquee></div>
+          <div class="px-2 bg-primary text-white"><marquee class="py-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt doloremque quas autem dolores error consequatur? Architecto, assumenda rerum laudantium molestiae consequatur eligendi nisi possimus commodi sunt! Provident, voluptatem saepe. Corrupti?</marquee></div>
         </div> 
         <!-- partial -->
       </div>

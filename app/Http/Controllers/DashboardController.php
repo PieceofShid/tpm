@@ -23,4 +23,23 @@ class DashboardController extends Controller
 
         return view('layout.page.dashboard.kanban', compact('waitings', 'dones', 'delays'));
     }
+
+    public function monthly()
+    {
+        $events = MasterSchedule::all();
+
+        $event = array();
+        foreach($events as $data){
+            $event[] = array(
+                "id"=> $data->id,
+                "name"=> $data->user->name,
+                "description"=> $data->tasks,
+                "date"=> $data->date,
+                "type"=>"events",
+                "everyYear"=>false
+            );
+        }
+
+        return view('layout.page.dashboard.month', compact('event'));
+    } 
 }

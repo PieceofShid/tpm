@@ -45,6 +45,31 @@ LOCK TABLES `failed_jobs` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `kanbans`
+--
+
+DROP TABLE IF EXISTS `kanbans`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `kanbans` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `kanbans`
+--
+
+LOCK TABLES `kanbans` WRITE;
+/*!40000 ALTER TABLE `kanbans` DISABLE KEYS */;
+/*!40000 ALTER TABLE `kanbans` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `levels`
 --
 
@@ -112,6 +137,7 @@ CREATE TABLE `master_schedules` (
   `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'waiting',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `tasks` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `master_schedules_user_id_foreign` (`user_id`),
   KEY `master_schedules_shift_id_foreign` (`shift_id`),
@@ -119,7 +145,7 @@ CREATE TABLE `master_schedules` (
   CONSTRAINT `master_schedules_machine_id_foreign` FOREIGN KEY (`machine_id`) REFERENCES `machines` (`id`) ON DELETE CASCADE,
   CONSTRAINT `master_schedules_shift_id_foreign` FOREIGN KEY (`shift_id`) REFERENCES `shifts` (`id`),
   CONSTRAINT `master_schedules_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -128,7 +154,7 @@ CREATE TABLE `master_schedules` (
 
 LOCK TABLES `master_schedules` WRITE;
 /*!40000 ALTER TABLE `master_schedules` DISABLE KEYS */;
-INSERT INTO `master_schedules` VALUES (1,3,'2022-07-07',1,1,'waiting','2022-07-05 21:06:15','2022-07-05 21:06:15');
+INSERT INTO `master_schedules` VALUES (1,3,'2022-07-07',1,1,'waiting','2022-07-05 21:06:15','2022-07-19 19:41:00','Ganti Oli'),(2,3,'2022-07-21',3,1,'waiting','2022-07-19 21:36:39','2022-07-19 21:36:39','Cek Rantai');
 /*!40000 ALTER TABLE `master_schedules` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -144,7 +170,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -153,7 +179,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (1,'2014_10_12_100000_create_password_resets_table',1),(2,'2019_08_19_000000_create_failed_jobs_table',1),(3,'2019_12_14_000001_create_personal_access_tokens_table',1),(4,'2022_07_06_022232_create_levels_table',1),(5,'2022_07_06_022621_create_machines_table',1),(6,'2022_07_06_022802_create_shifts_table',1),(7,'2022_07_06_030000_create_users_table',1),(8,'2022_07_06_043000_create_master_schedules_table',1);
+INSERT INTO `migrations` VALUES (1,'2014_10_12_100000_create_password_resets_table',1),(2,'2019_08_19_000000_create_failed_jobs_table',1),(3,'2019_12_14_000001_create_personal_access_tokens_table',1),(4,'2022_07_06_022232_create_levels_table',1),(5,'2022_07_06_022621_create_machines_table',1),(6,'2022_07_06_022802_create_shifts_table',1),(7,'2022_07_06_030000_create_users_table',1),(8,'2022_07_06_043000_create_master_schedules_table',1),(9,'2022_07_14_172533_create_kanbans_table',2),(10,'2022_07_20_023852_update_master_schedules',3);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -226,7 +252,7 @@ CREATE TABLE `shifts` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -235,7 +261,7 @@ CREATE TABLE `shifts` (
 
 LOCK TABLES `shifts` WRITE;
 /*!40000 ALTER TABLE `shifts` DISABLE KEYS */;
-INSERT INTO `shifts` VALUES (1,'Shift Grey','2022-07-05 20:38:35','2022-07-05 20:38:44');
+INSERT INTO `shifts` VALUES (1,'Shift Grey','2022-07-05 20:38:35','2022-07-05 20:38:44'),(2,'Shift Red','2022-07-19 20:58:53','2022-07-19 20:58:53'),(3,'Shift Green','2022-07-19 20:59:21','2022-07-19 20:59:21'),(4,'Shift Blue','2022-07-19 20:59:34','2022-07-19 20:59:34');
 /*!40000 ALTER TABLE `shifts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -283,4 +309,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-06 11:09:03
+-- Dump completed on 2022-07-20 13:11:09

@@ -74,7 +74,7 @@ Route::middleware('auth')->group(function(){
     });
     //Route Kanban
     Route::prefix('kanban')->group(function(){
-        Route::get('/', [DashboardController::class, 'kanban'])->name('kanban.index');
+        Route::get('/', [DashboardController::class, 'kanban'])->name('kanban.index');        
         // Route::get('/', [KanbanController::class, 'index'])->name('kanban.index');
         // Route::get('/tambah', [KanbanController::class, 'add'])->name('kanban.add');
         // Route::post('/tambah', [KanbanController::class, 'create'])->name('kanban.create');
@@ -85,5 +85,9 @@ Route::middleware('auth')->group(function(){
     //Route Dashboard
     Route::prefix('dashboard')->group(function(){
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    });
+    //Route Monthly
+    Route::prefix('monthly')->group(function(){
+        Route::get('/', [DashboardController::class, 'monthly'])->name('kanban.monthly');
     });
 });

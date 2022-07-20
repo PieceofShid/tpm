@@ -19,6 +19,10 @@
   <link rel="stylesheet" href="{{ asset('assets/vertical-layout-light/style.css')}}">
   <!-- endinject -->
   <link rel="shortcut icon" href="images/favicon.png" />
+  <!-- evo calendar -->
+  <link rel="stylesheet" href="{{ asset('assets/evo-calendar/css/evo-calendar.min.css')}}">
+  <link rel="stylesheet" href="{{ asset('assets/evo-calendar/css/evo-calendar.orange-coral.min.css')}}">
+  <!-- end evo -->
 </head>
 <body>
   <div class="container-scroller">
@@ -27,8 +31,8 @@
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
         {{-- <a class="navbar-brand brand-logo mr-5" href="index.html"><img src="images/logo.svg" class="mr-2" alt="logo"/></a>
         <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg" alt="logo"/></a> --}}
-        <a href="#" class="navbar-brand brand-logo mr-5">TPM Utility</a>
-        <a class="navbar-brand brand-logo-mini" href="#">TPM</a>
+        <a href="{{ route('dashboard')}}" class="navbar-brand brand-logo mr-5">TPM Utility</a>
+        <a class="navbar-brand brand-logo-mini" href="{{ route('dashboard')}}">TPM</a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -75,7 +79,13 @@
               <span class="menu-title">Master Schedule</span>
             </a>
           </li>
-          <li class="nav-item @if(Route::is('kanban.index')||Route::is('kanban.add')||Route::is('kanban.edit')) active @endif">
+          <li class="nav-item @if(Route::is('kanban.monthly')) active @endif">
+            <a class="nav-link" href="{{ route('kanban.monthly')}}">
+              <i class="ti-calendar menu-icon"></i>
+             <span class="menu-title">Monthly Kanban</span>
+            </a>
+          </li>
+          <li class="nav-item @if(Route::is('kanban.index')) active @endif">
             <a class="nav-link" href="{{ route('kanban.index')}}">
               <i class="ti-notepad menu-icon"></i>
               <span class="menu-title">Kanban Check</span>
@@ -118,9 +128,11 @@
           </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
-        <div style="position: absolute; bottom:0; left:0;width:100%">
+        @if (!Route::is('kanban.monthly'))
+        <div style="position: fixed; bottom:0; left:0;width:100%">
           <div class="px-2 bg-primary text-white"><marquee class="py-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt doloremque quas autem dolores error consequatur? Architecto, assumenda rerum laudantium molestiae consequatur eligendi nisi possimus commodi sunt! Provident, voluptatem saepe. Corrupti?</marquee></div>
         </div> 
+        @endif
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
@@ -147,6 +159,10 @@
   <!-- moment js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>
+
+  <!-- evo calendar -->
+  <script src="{{ asset('assets/evo-calendar/js/evo-calendar.min.js')}}"></script>
+  <!-- end evo -->
 
   @yield('script')
 

@@ -142,6 +142,14 @@
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
         @if (!Route::is('kanban.monthly'))
+        @php
+          $running = App\Models\RunningText::where('code', 1)->get();
+          foreach($running as $row){
+            $data = $row->text;
+          }
+
+          count($running) > 0 ? $text = $data : $text = null;
+        @endphp
         <div style="position: fixed; bottom:0; left:0;width:100%">
           <div class="px-2 bg-primary text-white"><marquee class="py-3">{{ucwords($text)}}</marquee></div>
         </div> 

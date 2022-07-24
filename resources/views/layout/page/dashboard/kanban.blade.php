@@ -44,7 +44,8 @@
                 <td>
                   <div class="bg-white border p-2 mb-2">
                     <p>{{$waiting->date}} - {{$waiting->user->name}}</p>
-                    <p>Tasks : {{$waiting->tasks}}</p>
+                    <p><i class="ti-settings"></i> : {{$waiting->machine->name}}</p>
+                    <p><i class="ti-bolt"></i> : {{$waiting->tasks}}</p>
                   </div>
                 </td>
               </tr>
@@ -67,7 +68,9 @@
                 <td>
                   <div class="bg-white border p-2 mb-2">
                     <p>{{$delay->date}} - {{$delay->user->name}}</p>
-                    <p>Tasks : {{$delay->tasks}}</p>
+                    <p><i class="ti-settings"></i> : {{$delay->machine->name}}</p>
+                    <p><i class="ti-bolt"></i> : {{$delay->tasks}}</p>
+                    <p><button class="btn btn-sm btn-primary" onclick="reschedule('{{$delay->id}}')">Reschedule</button></p>
                   </div>
                 </td>
               </tr>
@@ -90,13 +93,38 @@
                 <td>
                   <div class="bg-white border p-2 mb-2">
                     <p>{{$done->date}} - {{$done->user->name}}</p>
-                    <p>Tasks : {{$done->tasks}}</p>
+                    <p><i class="ti-settings"></i> : {{$done->machine->name}}</p>
+                    <p><i class="ti-bolt"></i> : {{$done->tasks}}</p>
                   </div>
                 </td>
               </tr>
             @endforeach
           </tbody>
         </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Reschedule</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <form action="" method="post" id="form">
+          <div class="modal-body">
+            @csrf
+            @method('post')
+            <input type="date" name="date" id="date" class="form-control" required>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success">Reschedule</button>
+            <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -109,8 +137,16 @@
         searching: false,
         ordering: false,
         lengthChange: false,
-        info: false
+        info: false,
+        lengthMenu: [2],
       });
     })
+
+    function reschedule(id){
+      var url = "{{ route('kanban.reschedule', ":id")}}";
+      url = url.replace(':id', id);
+      $('#form').attr('action', url);
+      $('#modal').modal('show');
+    }
   </script>
 @endsection

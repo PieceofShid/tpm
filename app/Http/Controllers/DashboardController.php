@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\MasterSchedule;
-use App\Models\RunningText;
 use App\Models\Shift;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -14,15 +14,15 @@ class DashboardController extends Controller
     {
         $shifts = Shift::all();
         $delays = MasterSchedule::where('status', 'delay')->count();
-        $running = RunningText::where('code', 1)->get();
 
-        foreach($running as $row){
-            $data = $row->text;
+        $today = Carbon::now()->format('Y-m-d');
+        $filter = MasterSchedule::where('status', 'waiting')->where('date', '>', $today)->get();
+
+        foreach($filter as $exec){
+            MasterSchedule::where('id', $exec->id)->update(['status' => 'delay']);
         }
 
-        count($running) > 0 ? $text = $data : $text = null;
-
-        return view('layout.page.dashboard.index', compact('shifts', 'delays', 'text'));
+        return view('layout.page.dashboard.index', compact('shifts', 'delays'));
     }
 
     public function kanban()
@@ -64,11 +64,25 @@ class DashboardController extends Controller
     public function done($id)
     {
         try{
-            MasterSchedule::where('id', $id)->update(['status' => 'done']);
+            MasterSchedule::find($id)->update(['status' => 'done']);
 
             return redirect()->route('dashboard')->with('success', 'Data berhasil diupdate');
         }catch(Exception $x){
             return redirect()->route('dashboard')->with('error', $x->getMessage());
+        }
+    }
+
+    public function reschedule(Request $request, $id)
+    {
+        try{
+            MasterSchedule::find($id)->update([
+                'date' => $request->date,
+                'status' => 'waiting'
+            ]);
+
+            return redirect()->route('kanban.index')->with('success', 'Data berhasil diupdate');
+        }catch(Exception $x){
+            return redirect()->route('kanban.index')->with('error', $x->getMessage());
         }
     }
 }

@@ -38,8 +38,8 @@
               <h5 class="text-primary text-center">{{$shift->name}}</h5>
               <hr>
               @php
-                // $schedules = \App\Models\MasterSchedule::where('shift_id', $shift->id)->where('date', 'CURRENT_DATE()')->get();
-                $schedules = \App\Models\MasterSchedule::where('shift_id', $shift->id)->where('status', 'waiting')->get();
+                $today = \Carbon\Carbon::now()->format('Y-m-d');
+                $schedules = \App\Models\MasterSchedule::where('shift_id', $shift->id)->where('status', 'waiting')->where('date', $today)->get();
               @endphp
               @foreach ($schedules as $key => $schedule)
                 <div class="card mb-2">
@@ -78,9 +78,15 @@
         <div class="card-body text-center">
           <h5>Document</h5>
           <hr>
-          <h6><i class="ti-file"></i> SOP</h6>
-          <h6><i class="ti-file"></i> FLOW PM</h6>
-          <h6><i class="ti-file"></i> FLOW CM</h6>
+          <h6>
+            <a href="{{ asset('assets/img/sop.pdf')}}" target="_blank"><i class="ti-file"></i> SOP</a>
+          </h6>
+          <h6>
+            <a href="{{ asset('assets/img/pm.pdf')}}" target="_blank"><i class="ti-file"></i> FLOW PM</a>
+          </h6>
+          <h6>
+            <a href="{{ asset('assets/img/cm.pdf')}}" target="_blank"><i class="ti-file"></i> FLOW CM</a>
+          </h6>
         </div>
       </div>
     </div>

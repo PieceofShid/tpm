@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MasterSchedule;
+use App\Models\RunningText;
 use App\Models\Shift;
 use Exception;
 use Illuminate\Http\Request;
@@ -12,8 +13,16 @@ class DashboardController extends Controller
     public function index()
     {
         $shifts = Shift::all();
+        $delays = MasterSchedule::where('status', 'delay')->count();
+        $running = RunningText::where('code', 1)->get();
 
-        return view('layout.page.dashboard.index', compact('shifts'));
+        foreach($running as $row){
+            $data = $row->text;
+        }
+
+        count($running) > 0 ? $text = $data : $text = null;
+
+        return view('layout.page.dashboard.index', compact('shifts', 'delays', 'text'));
     }
 
     public function kanban()

@@ -22,4 +22,8 @@ class MasterSchedule extends Model
     public function machine(){
         return $this->belongsTo(Machine::class, 'machine_id');
     }
+
+    public function problem(){
+        return $this->hasMany(Problem::class, 'master_schedule_id');
+    }
 }

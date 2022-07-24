@@ -58,7 +58,7 @@
           </select>
         </div> --}}
         <div class="form-group">
-          <label for="tasks">Tasks</label>
+          <label for="tasks">Item Check</label>
           <input type="text" name="tasks" id="tasks" class="form-control" value="{{$schedule->tasks}}" required>
         </div>
         <button type="submit" class="btn btn-success">Simpan</button>

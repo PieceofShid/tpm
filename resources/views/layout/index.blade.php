@@ -39,10 +39,10 @@
           <span class="icon-menu"></span>
         </button>
         <ul class="navbar-nav mr-lg-2">
-          <li class="nav-item d-none d-lg-block">
+          <li class="nav-item d-none d-md-block">
             UTILITY MAINTENANCE KANBAN CONTROL DASHBOARD
           </li>
-          <li>
+          <li class="nav-item d-none d-sm-block">
            <span id="clock"></span>
           </li>
         </ul>
@@ -96,6 +96,12 @@
               <span class="menu-title">Data Mesin</span>
             </a>
           </li>
+          <li class="nav-item @if(Route::is('problem.index')||Route::is('problem.add')||Route::is('problem.edit')) active @endif">
+            <a class="nav-link" href="{{ route('problem.index')}}">
+              <i class="ti-bolt menu-icon"></i>
+              <span class="menu-title">Temuan Problem</span>
+            </a>
+          </li>
           <li class="nav-item @if(Route::is('shift.index')||Route::is('shift.add')||Route::is('shift.edit')) active @endif">
             <a class="nav-link" href="{{ route('shift.index')}}">
               <i class="ti-exchange-vertical menu-icon"></i>
@@ -110,12 +116,18 @@
               <span class="menu-title">Data Pengguna</span>
             </a>
           </li>
-          <li class="nav-item @if(Route::is('level.index')||Route::is('level.add')||Route::is('level.edit')) active @endif">
+          <li class="nav-item @if(Route::is('content.document')) active @endif">
+            <a class="nav-link" href="{{ route('content.document')}}">
+              <i class="ti-file menu-icon"></i>
+              <span class="menu-title">Data Content</span>
+            </a>
+          </li>
+          {{-- <li class="nav-item @if(Route::is('level.index')||Route::is('level.add')||Route::is('level.edit')) active @endif">
             <a class="nav-link" href="{{ route('level.index')}}">
               <i class="ti-star menu-icon"></i>
               <span class="menu-title">Data Level</span>
             </a>
-          </li>
+          </li> --}}
           @endif
         </ul>
       </nav>
@@ -131,7 +143,7 @@
         <!-- partial:partials/_footer.html -->
         @if (!Route::is('kanban.monthly'))
         <div style="position: fixed; bottom:0; left:0;width:100%">
-          <div class="px-2 bg-primary text-white"><marquee class="py-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt doloremque quas autem dolores error consequatur? Architecto, assumenda rerum laudantium molestiae consequatur eligendi nisi possimus commodi sunt! Provident, voluptatem saepe. Corrupti?</marquee></div>
+          <div class="px-2 bg-primary text-white"><marquee class="py-3">{{ucwords($text)}}</marquee></div>
         </div> 
         @endif
         <!-- partial -->

@@ -1,15 +1,14 @@
 @extends('layout.index')
 
 @section('title')
-  Master Schedule
+  Problem
 @endsection
 
 @section('content')
   <div class="card mb-4">
     <div class="card-body">
       <div class="d-flex justify-content-between align-items-center">
-        <h5>Master Schedule</h5>
-        <a href="{{ route('schedule.add')}}" class="btn btn-primary">Tambah</a>
+        <h5>Temuan Problem</h5>
       </div>
     </div>
   </div>
@@ -37,40 +36,22 @@
           <thead>
             <tr>
               <th>#</th>
-              <th>Tanggal</th>
-              <th>Operator</th>
               <th>Mesin</th>
-              <th>Shift</th>
-              {{-- <th>Kanban</th> --}}
-              <th>Item Check</th>
-              <th>Status</th>
+              <th>Tanggal Maintainance</th>
+              <th>Problem</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            @foreach ($schedules as $schedule)
+            @foreach ($problems as $problem)
               <tr>
                 <td></td>
-                <td>{{$schedule->date}}</td>
-                <td>{{$schedule->user->name}}</td>
-                <td>{{$schedule->machine->name}}</td>
-                <td>{{$schedule->shift->name}}</td>
-                {{-- <td>{{$schedule->kanban->name}}</td> --}}
-                <td>{{$schedule->tasks}}</td>
+                <td>{{$problem->schedule->machine->name}}</td>
+                <td>{{$problem->schedule->date}}</td>
+                <td>{{$problem->problem}}</td>
                 <td>
-                  @php
-                    if ($schedule->status == 'waiting') {
-                      echo '<label class="badge badge-warning">Waiting</label>';
-                    }elseif ($schedule->status == 'delay') {
-                      echo '<label class="badge badge-danger">Delay</label>';
-                    }elseif ($schedule->status == 'done') {
-                      echo '<label class="badge badge-success">Done</label>';
-                    }
-                  @endphp
-                </td>
-                <td>
-                  <a href="{{ route('schedule.edit', $schedule->id)}}" class="btn btn-sm text-warning"><i class="ti-pencil"></i></a>
-                  <button class="btn btn-sm text-danger" onclick="hapus('{{$schedule->id}}')"><i class="ti-trash"></i></button>
+                  <a href="{{ route('problem.edit', $problem->id)}}" class="btn btn-sm text-warning"><i class="ti-pencil"></i></a>
+                  <button class="btn btn-sm text-danger" onclick="hapus('{{$problem->id}}')"><i class="ti-trash"></i></button>
                 </td>
               </tr>
             @endforeach
@@ -84,7 +65,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="Labelmodal">Hapus Schedule</h5>
+          <h5 class="modal-title" id="Labelmodal">Hapus Problem</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -112,7 +93,7 @@
     })
 
     function hapus(id){
-      var url = "{{ route('schedule.delete', ":id")}}";
+      var url = "{{ route('problem.delete', ":id")}}";
       url = url.replace(':id', id);
       $('#formModal').attr('action', url);
       $('#modal').modal('show');

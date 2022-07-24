@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\KanbanController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\MachineController;
 use App\Http\Controllers\MasterScheduleController;
+use App\Http\Controllers\ProblemController;
 use App\Http\Controllers\ShiftController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -70,7 +72,7 @@ Route::middleware('auth')->group(function(){
         Route::post('/tambah', [MasterScheduleController::class, 'create'])->name('schedule.create');
         Route::get('/{id}/edit', [MasterScheduleController::class, 'edit'])->name('schedule.edit');
         Route::post('/{id}/update', [MasterScheduleController::class, 'update'])->name('schedule.update');
-        Route::delete('/{id}/delete', [ShiMasterScheduleControllerftController::class, 'delete'])->name('schedule.delete');
+        Route::delete('/{id}/delete', [MasterScheduleController::class, 'delete'])->name('schedule.delete');
     });
     //Route Kanban
     Route::prefix('kanban')->group(function(){
@@ -90,5 +92,20 @@ Route::middleware('auth')->group(function(){
     //Route Monthly
     Route::prefix('monthly')->group(function(){
         Route::get('/', [DashboardController::class, 'monthly'])->name('kanban.monthly');
+    });
+    //Route Content
+    Route::prefix('content')->group(function(){
+        Route::get('/document', [DocumentController::class, 'index'])->name('content.document');
+        Route::post('/document', [DocumentController::class, 'upload'])->name('content.document.upload');
+        Route::post('/document/update', [DocumentController::class, 'update'])->name('content.document.update');
+        Route::post('/document/text', [DocumentController::class, 'running'])->name('content.document.text');
+    });
+    //Route Problem
+    Route::prefix('problem')->group(function(){
+        Route::get('/', [ProblemController::class, 'index'])->name('problem.index');
+        Route::post('/{id}/tambah', [ProblemController::class, 'create'])->name('problem.create');
+        Route::get('/{id}/edit', [ProblemController::class, 'edit'])->name('problem.edit');
+        Route::post('/{id}/update', [ProblemController::class, 'update'])->name('problem.update');
+        Route::delete('/{id}/delete', [ProblemController::class, 'delete'])->name('problem.delete');
     });
 });

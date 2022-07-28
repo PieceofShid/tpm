@@ -12,15 +12,15 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $shifts = Shift::all();
-        $delays = MasterSchedule::where('status', 'delay')->count();
-
         $today = Carbon::now()->format('Y-m-d');
-        $filter = MasterSchedule::where('status', 'waiting')->where('date', '>', $today)->get();
+        $filter = MasterSchedule::where('status', '=','waiting')->where('date', '<', $today)->get();
 
         foreach($filter as $exec){
             MasterSchedule::where('id', $exec->id)->update(['status' => 'delay']);
         }
+      
+        $shifts = Shift::all();
+        $delays = MasterSchedule::where('status', 'delay')->count();
 
         return view('layout.page.dashboard.index', compact('shifts', 'delays'));
     }

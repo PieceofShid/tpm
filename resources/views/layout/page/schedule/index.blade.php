@@ -64,7 +64,9 @@
                     }elseif ($schedule->status == 'delay') {
                       echo '<label class="badge badge-danger">Delay</label>';
                     }elseif ($schedule->status == 'done') {
-                      echo '<label class="badge badge-success">Done</label>';
+                      echo '<label class="badge badge-info">Done</label>';
+                    }elseif ($schedule->status == 'complete') {
+                      echo '<label class="badge badge-success">Finish</label>';
                     }
                   @endphp
                 </td>

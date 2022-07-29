@@ -21,8 +21,9 @@ class DashboardController extends Controller
       
         $shifts = Shift::all();
         $delays = MasterSchedule::where('status', 'delay')->count();
+        $dones = MasterSchedule::where('status', 'done')->count();
 
-        return view('layout.page.dashboard.index', compact('shifts', 'delays'));
+        return view('layout.page.dashboard.index', compact('shifts', 'delays', 'dones'));
     }
 
     public function kanban()
@@ -30,8 +31,9 @@ class DashboardController extends Controller
         $waitings = MasterSchedule::where('status', 'waiting')->get();
         $dones = MasterSchedule::where('status', 'done')->get();
         $delays = MasterSchedule::where('status', 'delay')->get();
+        $completes = MasterSchedule::where('status', 'complete')->get();
 
-        return view('layout.page.dashboard.kanban', compact('waitings', 'dones', 'delays'));
+        return view('layout.page.dashboard.kanban', compact('waitings', 'dones', 'delays', 'completes'));
     }
 
     public function monthly()
@@ -45,6 +47,8 @@ class DashboardController extends Controller
             }elseif($data->status == 'delay'){
                 $color = '#FF4747';
             }elseif($data->status == 'done'){
+                $color = '#248AFD';
+            }elseif($data->status == 'complete'){
                 $color = '#57B657';
             }
             $event[] = array(
@@ -79,6 +83,17 @@ class DashboardController extends Controller
                 'date' => $request->date,
                 'status' => 'waiting'
             ]);
+
+            return redirect()->route('kanban.index')->with('success', 'Data berhasil diupdate');
+        }catch(Exception $x){
+            return redirect()->route('kanban.index')->with('error', $x->getMessage());
+        }
+    }
+
+    public function complete($id)
+    {
+        try{
+            MasterSchedule::find($id)->update(['status' => 'complete']);
 
             return redirect()->route('kanban.index')->with('success', 'Data berhasil diupdate');
         }catch(Exception $x){

@@ -71,9 +71,18 @@
     <div class="col-12 col-md-3">
       <div class="card">
         <div class="card-body text-center">
-          <h5>Delay Process</h5>
-          <hr>
-          <h4><a href="{{ route('kanban.index')}}" class="btn btn-sm btn-danger count-indicator"><i class="ti-bell"></i> {{$delays}}</a></h4>
+          <div class="row">
+            <div class="col">
+              <h5>Delay Check</h5>
+              <br>
+              <h4><a href="{{ route('kanban.index')}}" class="btn btn-sm btn-danger count-indicator"><i class="ti-bell"></i> {{$delays}}</a></h4>
+            </div>
+            <div class="col">
+              <h5>Finish Check</h5>
+              <br>
+              <h4><a href="{{ route('kanban.index')}}" class="btn btn-sm btn-success count-indicator"><i class="ti-bell"></i> {{$dones}}</a></h4>
+            </div>
+          </div>
         </div>
         <div class="card-body text-center">
           <h5>Document</h5>

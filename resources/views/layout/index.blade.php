@@ -77,7 +77,7 @@
              <span class="menu-title">Monthly Kanban</span>
             </a>
           </li>
-          @if (auth()->user()->level_id == 1)
+          @if (auth()->user()->level_id == 1 || auth()->user()->level_id == 2)
           <li class="nav-item @if(Route::is('schedule.index')||Route::is('schedule.add')||Route::is('schedule.edit')) active @endif">
             <a class="nav-link" href="{{ route('schedule.index')}}">
               <i class="ti-calendar menu-icon"></i>
@@ -109,7 +109,7 @@
             </a>
           </li>
           @endif
-          @if (auth()->user()->level_id == 1 || auth()->user()->level_id == 2)
+          @if (auth()->user()->level_id == 1)
           <li class="nav-item @if(Route::is('user.index')||Route::is('user.add')||Route::is('user.edit')) active @endif">
             <a class="nav-link" href="{{ route('user.index')}}">
               <i class="ti-user menu-icon"></i>

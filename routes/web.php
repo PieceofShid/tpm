@@ -78,6 +78,7 @@ Route::middleware('auth')->group(function(){
     Route::prefix('kanban')->group(function(){
         Route::get('/', [DashboardController::class, 'kanban'])->name('kanban.index');      
         Route::post('/{id}/reschedule', [DashboardController::class, 'reschedule'])->name('kanban.reschedule');
+        Route::post('/{id}/complete', [DashboardController::class, 'complete'])->name('kanban.complete');
         // Route::get('/', [KanbanController::class, 'index'])->name('kanban.index');
         // Route::get('/tambah', [KanbanController::class, 'add'])->name('kanban.add');
         // Route::post('/tambah', [KanbanController::class, 'create'])->name('kanban.create');

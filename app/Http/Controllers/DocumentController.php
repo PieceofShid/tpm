@@ -47,8 +47,6 @@ class DocumentController extends Controller
         }catch(Exception $x){
             return redirect()->route('content.document')->with('error', $x->getMessage());
         }
-
-        return $data;
     }
 
     public function update(Request $request)

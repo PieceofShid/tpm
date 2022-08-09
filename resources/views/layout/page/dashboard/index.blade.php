@@ -12,6 +12,68 @@
       </div>
     </div>
   </div>
+  <div class="card mb-4 py-2 px-4">
+    <div class="d-flex justify-content-center align-items-center">
+      <div class="row">
+        <div class="col-12 col-md-2 mb-2 text-center">
+          <a class="nav-link text-primary" href="{{ route('kanban.monthly')}}">
+            <i class="ti-calendar menu-icon icon-lg"></i>
+            <br>
+            <span class="menu-title">Monthly Kanban</span>
+          </a>
+        </div>
+        <div class="col-12 col-md-2 mb-2 text-center">
+          <a class="nav-link text-primary" href="{{ route('schedule.index')}}">
+            <i class="ti-calendar menu-icon icon-lg"></i>
+            <br>
+            <span class="menu-title">Master Schedule</span>
+          </a>
+        </div>
+        <div class="col-12 col-md-2 mb-2 text-center">
+          <a class="nav-link text-primary" href="{{ route('kanban.index')}}">
+            <i class="ti-notepad menu-icon icon-lg"></i>
+            <br>
+            <span class="menu-title">Kanban Check</span>
+          </a>
+        </div>
+        <div class="col-12 col-md-2 mb-2 text-center">
+          <a class="nav-link text-primary" href="{{ route('mesin.index')}}">
+            <i class="ti-settings menu-icon icon-lg"></i>
+            <br>
+            <span class="menu-title">Data Mesin</span>
+          </a>
+        </div>
+        <div class="col-12 col-md-2 mb-2 text-center">
+          <a class="nav-link text-primary" href="{{ route('problem.index')}}">
+            <i class="ti-bolt menu-icon icon-lg"></i>
+            <br>
+            <span class="menu-title">Temuan Problem</span>
+          </a>
+        </div>
+        <div class="col-12 col-md-2 mb-2 text-center">
+          <a class="nav-link text-primary" href="{{ route('shift.index')}}">
+            <i class="ti-exchange-vertical menu-icon icon-lg"></i>
+            <br>
+            <span class="menu-title">Data Shift</span>
+          </a>
+        </div>
+        <div class="col-12 col-md-2 mb-2 text-center">
+          <a class="nav-link text-primary" href="{{ route('user.index')}}">
+            <i class="ti-user menu-icon icon-lg"></i>
+            <br>
+            <span class="menu-title">Data Pengguna</span>
+          </a>
+        </div>
+        <div class="col-12 col-md-2 mb-2 text-center">
+          <a class="nav-link text-primary" href="{{ route('content.document')}}">
+            <i class="ti-file menu-icon icon-lg"></i>
+            <br>
+            <span class="menu-title">Data Content</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
   @php
     if(session('success')){
       echo '  <div class="alert alert-success alert-dismissable fade show" role="alert">
@@ -84,18 +146,45 @@
             </div>
           </div>
         </div>
-        <div class="card-body text-center">
-          <h5>Document</h5>
-          <hr>
-          <h6>
-            <a href="{{ asset('assets/img/sop.pdf')}}" target="_blank"><i class="ti-file"></i> SOP</a>
-          </h6>
-          <h6>
-            <a href="{{ asset('assets/img/pm.pdf')}}" target="_blank"><i class="ti-file"></i> FLOW PM</a>
-          </h6>
-          <h6>
-            <a href="{{ asset('assets/img/cm.pdf')}}" target="_blank"><i class="ti-file"></i> FLOW CM</a>
-          </h6>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="card-body text-center">
+        <h5>Document</h5>
+        <hr>
+        <div class="row">
+          <div class="col-12 col-md-4">
+            <h6>
+              <a class="nav-link text-primary" href="{{ asset('assets/img/sop.pdf')}}" target="_blank">
+                <img src="{{ asset('assets/img/pdf-file.png')}}" alt="" srcset="" width="120" height="120">
+                <br>
+                <br>
+                SOP
+              </a>
+            </h6>
+          </div>
+          <div class="col-12 col-md-4">
+            <h6>
+              <a class="nav-link text-primary" href="{{ asset('assets/img/pm.pdf')}}" target="_blank">
+                <img src="{{ asset('assets/img/pdf-file.png')}}" alt="" srcset="" width="120" height="120">
+                <br>
+                <br>
+                FLOW PM
+              </a>
+            </h6>
+          </div>
+          <div class="col-12 col-md-4">
+            <h6>
+              <a class="nav-link text-primary" href="{{ asset('assets/img/cm.pdf')}}" target="_blank">
+                <img src="{{ asset('assets/img/pdf-file.png')}}" alt="" srcset="" width="120" height="120">
+                <br>
+                <br>
+                FLOW CM
+              </a>
+            </h6>
+          </div>
         </div>
       </div>
     </div>

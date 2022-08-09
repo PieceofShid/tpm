@@ -39,14 +39,14 @@
           <span class="icon-menu"></span>
         </button>
         <ul class="navbar-nav mr-lg-2">
-          <li class="nav-item d-none d-md-block">
+          <li class="nav-item d-none d-md-block h3 font-weight-light mt-2">
             UTILITY MAINTENANCE KANBAN CONTROL DASHBOARD
-          </li>
-          <li class="nav-item d-none d-sm-block">
-           <span id="clock"></span>
           </li>
         </ul>
         <ul class="navbar-nav navbar-nav-right">
+          <li class="nav-item">
+            <span class="d-none d-sm-block" id="clock"></span>
+          </li>
           <li class="nav-item">
             <a href="{{ route('auth.logout')}}" class="nav-link">
               Logout

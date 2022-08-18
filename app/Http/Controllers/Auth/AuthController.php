@@ -31,8 +31,6 @@ class AuthController extends Controller
     {
         if(auth()->user()->level_id == 1){
             return redirect()->route('user.index');
-        }elseif(auth()->user()->level_id == 2){
-            return redirect()->route('schedule.index');
         }else{
             return redirect()->route('dashboard');
         }
